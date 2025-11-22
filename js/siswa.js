@@ -1,8 +1,6 @@
 checkAuth('siswa');
 
 console.log("siswa.js loaded!");
-let stream;
-let currentFacingMode = 'user'; // Mulai dengan kamera depan
 
 document.addEventListener("DOMContentLoaded", () => {
     console.log("DOM loaded, menjalankan fungsi...");
