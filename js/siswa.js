@@ -367,7 +367,7 @@ function doAbsensi() {
         
         tampilkanPeta(userLat, userLon, jarak);
 
-        const batasJarak = 1000; 
+        const batasJarak = 100000; 
         if (jarak > batasJarak) {
           alert('Anda terlalu jauh dari sekolah. Absensi Hadir tidak bisa dilakukan.');
           return;
