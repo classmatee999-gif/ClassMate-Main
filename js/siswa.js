@@ -324,7 +324,7 @@ function doAbsensi() {
   }
 
   
-    if (hour >= 8) {
+    if (hour >= 23) {
     tandaiAlpa();
     return;
   }
