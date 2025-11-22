@@ -3,14 +3,26 @@ checkAuth('siswa');
 console.log("siswa.js loaded!");
 
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("DOM loaded, menjalankan fungsi...");
-  try {
-    loadTugasData();
-    loadAbsensiHistory();
-    updateCurrentTime();
-  } catch (e) {
-    console.error("Terjadi error saat menjalankan fungsi:", e);
-  }
+    console.log("DOM loaded, menjalankan fungsi...");
+    try {
+        loadTugasData();
+        loadAbsensiHistory();
+        updateCurrentTime();
+        
+        // ----------------------------------------------------------
+        // Cek status absensi saat halaman dimuat
+        const today = new Date().toDateString();
+        const lastAbsensiDate = localStorage.getItem('lastAbsensiDate');
+        if (lastAbsensiDate === today) {
+            disableAbsenButton();
+            document.getElementById('absensiStatus').textContent = 'Anda sudah absen hari ini.';
+            document.getElementById('absensiStatus').classList.remove("hidden");
+        }
+        // ----------------------------------------------------------
+        
+    } catch (e) {
+        console.error("Terjadi error saat menjalankan fungsi:", e);
+    }
 });
 
 const daftarTugas = [
