@@ -298,11 +298,24 @@ function tampilkanPeta(lat, lon, jarak) {
 function lanjutkanAbsensi(now, hour, minute, status, photo, keterangan = "") {
     const waktu = `${String(hour).padStart(2, "0")}:${String(minute).padStart(2, "0")}:00`;
 
+    // ------------------------------------------------------------------
+    // ✅ LOGIKA BARU UNTUK KETERANGAN
+    let finalKeterangan = keterangan;
+
+    if (status === "Izin") {
+        // Jika status Izin, gunakan input user (keterangan), jika kosong gunakan "Izin diberikan"
+        finalKeterangan = keterangan || "Izin diberikan"; 
+    } else if (status === "Hadir") {
+        // Jika status Hadir, gunakan keterangan yang didapat dari kalkulasi (terlambat), jika kosong gunakan "Tepat waktu"
+        finalKeterangan = keterangan || "Tepat waktu"; 
+    }
+    // ------------------------------------------------------------------
+
     const newAbsensi = {
         tanggal: now.toISOString().split('T')[0],
         waktu,
         status,
-        keterangan: (status === "Izin") ? keterangan : (keterangan || (status === "Izin" ? "Izin diberikan" : "Tepat waktu"))
+        keterangan: finalKeterangan // Menggunakan hasil perhitungan yang sudah disederhanakan
     };
 
     riwayatAbsensi.unshift(newAbsensi);
