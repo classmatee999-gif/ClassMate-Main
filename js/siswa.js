@@ -284,32 +284,51 @@ function tampilkanPeta(lat, lon, jarak) {
 }
 
 function lanjutkanAbsensi(now, hour, minute, status, photo, keterangan = "") {
-  const waktu = `${String(hour).padStart(2, "0")}:${String(minute).padStart(2, "0")}:00`;
+    const waktu = `${String(hour).padStart(2, "0")}:${String(minute).padStart(2, "0")}:00`;
 
-  const newAbsensi = {
-    tanggal: now.toISOString().split('T')[0],
-    waktu,
-    status,
-    keterangan: keterangan || (status === "Izin" ? "Izin diberikan" : "Tepat waktu")
-  };
+    const newAbsensi = {
+        tanggal: now.toISOString().split('T')[0],
+        waktu,
+        status,
+        keterangan: (status === "Izin") ? keterangan : (keterangan || (status === "Izin" ? "Izin diberikan" : "Tepat waktu"))
+    };
 
-  riwayatAbsensi.unshift(newAbsensi);
-  loadAbsensiHistory();
+    riwayatAbsensi.unshift(newAbsensi);
+    loadAbsensiHistory();
 
-  const absensiStatus = document.getElementById("absensiStatus");
-  absensiStatus.textContent = `✅ Absensi ${status} berhasil! (${keterangan})`;
-  absensiStatus.classList.remove("hidden");
-  absensiStatus.classList.add("slide-down");
+    const absensiStatus = document.getElementById("absensiStatus");
+    absensiStatus.textContent = `✅ Absensi ${status} berhasil! (${newAbsensi.keterangan})`;
+    absensiStatus.classList.remove("hidden");
+    absensiStatus.classList.add("slide-down");
+    
+    // ------------------------------------------------------------------
+    // ✅ LOGIKA PENYIMPANAN ABSENSI BERHASIL DI SINI ✅
+     const today = new Date().toDateString();
+      localStorage.setItem('lastAbsensiDate', today);
+    
+    // Nonaktifkan tombol absensi setelah berhasil
+     disableAbsenButton();
+    // ------------------------------------------------------------------
 }
 
 function doAbsensi() {
   const now = new Date();
-  const hour = now.getHours();
   const minute = now.getMinutes();
+  const hour = now.getHours();
 
   const selectedStatus = (document.querySelector('input[name="status"]:checked') || {}).value || 'Hadir';
   const capturedPhoto = document.getElementById('capturedPhoto');
   const photoData = capturedPhoto ? capturedPhoto.src : null;
+  const today = new Date().toDateString(); // Contoh: "Wed Nov 19 2025"
+  const lastAbsensiDate = localStorage.getItem('lastAbsensiDate');
+
+  if (lastAbsensiDate === today) {
+        alert("Anda sudah melakukan absensi hari ini. Tidak perlu absen lagi.");
+        // Opsional: Nonaktifkan tombol Absen setelah ini
+        disableAbsenButton(); 
+        return; // Hentikan fungsi
+    }
+    // ------------------------------------------------------------------
 
   
   if (!photoTaken && selectedStatus === 'Hadir') {
@@ -318,14 +337,17 @@ function doAbsensi() {
   }
 
   
+  const keteranganInput = document.getElementById('keterangan');
+  const keteranganValue = keteranganInput.value;
+
   if (selectedStatus === 'Izin') {
-    lanjutkanAbsensi(now, hour, minute, selectedStatus, photoData, "Izin diberikan");
+    lanjutkanAbsensi(now, hour, minute, selectedStatus, photoData, keteranganValue);
     return;
-  }
+  } 
 
   
-   if (hour >= 23) {
-   tandaiAlpa();
+  if (hour >= 23) {
+    tandaiAlpa();
     return;
   }
 
@@ -345,7 +367,7 @@ function doAbsensi() {
         
         tampilkanPeta(userLat, userLon, jarak);
 
-        const batasJarak = 100; 
+        const batasJarak = 1000; 
         if (jarak > batasJarak) {
           alert('Anda terlalu jauh dari sekolah. Absensi Hadir tidak bisa dilakukan.');
           return;
