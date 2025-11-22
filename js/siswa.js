@@ -9,8 +9,6 @@ document.addEventListener("DOMContentLoaded", () => {
         loadAbsensiHistory();
         updateCurrentTime();
         
-        // ----------------------------------------------------------
-        // Cek status absensi saat halaman dimuat
         const today = new Date().toDateString();
         const lastAbsensiDate = localStorage.getItem('lastAbsensiDate');
          if (lastAbsensiDate === today) {
@@ -18,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
             document.getElementById('absensiStatus').textContent = 'Anda sudah absen hari ini.';
             document.getElementById('absensiStatus').classList.remove("hidden");
         }
-        // ----------------------------------------------------------
+       
         
     } catch (e) {
         console.error("Terjadi error saat menjalankan fungsi:", e);
