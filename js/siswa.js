@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
         updateCurrentTime();
         
         // ----------------------------------------------------------
-        Cek status absensi saat halaman dimuat
+        // Cek status absensi saat halaman dimuat
         const today = new Date().toDateString();
         const lastAbsensiDate = localStorage.getItem('lastAbsensiDate');
          if (lastAbsensiDate === today) {
