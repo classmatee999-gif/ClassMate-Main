@@ -11,9 +11,9 @@ document.addEventListener("DOMContentLoaded", () => {
         
         // ----------------------------------------------------------
         // Cek status absensi saat halaman dimuat
-        const today = new Date().toDateString();
-        const lastAbsensiDate = localStorage.getItem('lastAbsensiDate');
-        // if (lastAbsensiDate === today) {
+        // const today = new Date().toDateString();
+        // const lastAbsensiDate = localStorage.getItem('lastAbsensiDate');
+        // // if (lastAbsensiDate === today) {
         //     disableAbsenButton();
         //     document.getElementById('absensiStatus').textContent = 'Anda sudah absen hari ini.';
         //     document.getElementById('absensiStatus').classList.remove("hidden");
@@ -328,11 +328,11 @@ function lanjutkanAbsensi(now, hour, minute, status, photo, keterangan = "") {
     
     // ------------------------------------------------------------------
     // ✅ LOGIKA PENYIMPANAN ABSENSI BERHASIL DI SINI ✅
-     const today = new Date().toDateString();
-      localStorage.setItem('lastAbsensiDate', today);
+    //  const today = new Date().toDateString();
+    //   localStorage.setItem('lastAbsensiDate', today);
     
-    // Nonaktifkan tombol absensi setelah berhasil
-     disableAbsenButton();
+    // // Nonaktifkan tombol absensi setelah berhasil
+    //  disableAbsenButton();
     // ------------------------------------------------------------------
 }
 
@@ -347,12 +347,12 @@ function doAbsensi() {
   const today = new Date().toDateString(); // Contoh: "Wed Nov 19 2025"
   const lastAbsensiDate = localStorage.getItem('lastAbsensiDate');
 
-  if (lastAbsensiDate === today) {
-        alert("Anda sudah melakukan absensi hari ini. Tidak perlu absen lagi.");
-        // Opsional: Nonaktifkan tombol Absen setelah ini
-        disableAbsenButton(); 
-        return; // Hentikan fungsi
-    }
+  // if (lastAbsensiDate === today) {
+  //       alert("Anda sudah melakukan absensi hari ini. Tidak perlu absen lagi.");
+  //       // Opsional: Nonaktifkan tombol Absen setelah ini
+  //       disableAbsenButton(); 
+  //       return; // Hentikan fungsi
+  //   }
     // ------------------------------------------------------------------
 
   
