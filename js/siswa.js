@@ -366,7 +366,7 @@ function doAbsensi() {
   const keteranganValue = keteranganInput.value;
 
   if (selectedStatus === 'Izin') {
-    lanjutkanAbsensi(now, hour, minute, selectedStatus, keteranganValue);
+    lanjutkanAbsensi(now, hour, minute, selectedStatus, photoData, keteranganValue);
     return;
   } 
 
