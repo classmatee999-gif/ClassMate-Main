@@ -110,116 +110,59 @@
 
           <!-- Camera Section -->
           <div id="cameraSection" class="mb-4">
-            <div class="bg-white rounded-lg p-4 mb-4">
-              <div class="flex items-center justify-center mb-3">
-                <svg
-                  class="w-6 h-6 text-blue-500 mr-2"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
-                  />
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"
-                  />
-                </svg>
-                <p class="text-gray-700 font-semibold">
-                  Ambil Foto untuk Absensi
-                </p>
-              </div>
-
-              <div id="videoContainer" class="relative mb-3">
-                <video
-                  id="video"
-                  class="w-full rounded-lg"
-                  autoplay
-                  style="max-height: 400px; display: none"
-                ></video>
-                <canvas
-                  id="canvas"
-                  class="w-full rounded-lg"
-                  style="max-height: 400px; display: none"
-                ></canvas>
-                <img
-                  id="capturedPhoto"
-                  class="w-full rounded-lg"
-                  style="max-height: 400px; display: none"
-                />
-              </div>
-
-              <div class="flex gap-2">
-                <button
-                  onclick="startCamera()"
-                  id="startCameraBtn"
-                  class="flex-1 bg-green-500 hover:bg-green-600 text-white font-semibold py-3 rounded-lg transition-all duration-300 flex items-center justify-center"
-                >
-                  <svg
-                    class="w-5 h-5 mr-2"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
-                    />
-                  </svg>
-                  Buka Kamera
-                </button>
-                <button
-                  onclick="capturePhoto()"
-                  id="captureBtn"
-                  class="flex-1 bg-purple-500 hover:bg-purple-600 text-white font-semibold py-3 rounded-lg transition-all duration-300 hidden flex items-center justify-center"
-                >
-                  <svg
-                    class="w-5 h-5 mr-2"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"
-                    />
-                  </svg>
-                  Ambil Foto
-                </button>
-                <button
-                  onclick="retakePhoto()"
-                  id="retakeBtn"
-                  class="flex-1 bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-3 rounded-lg transition-all duration-300 hidden flex items-center justify-center"
-                >
-                  <svg
-                    class="w-5 h-5 mr-2"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
-                    />
-                  </svg>
-                  Foto Ulang
-                </button>
-              </div>
+    <div class="bg-white rounded-lg p-4 mb-4">
+        <div id="videoContainer" class="relative mb-3">
             </div>
-          </div>
 
+        <div class="flex gap-2 flex-wrap">
+            <button
+                onclick="startCamera()"
+                id="startCameraBtn"
+                class="flex-1 bg-green-500 hover:bg-green-600 text-white font-semibold py-3 rounded-lg transition-all duration-300 flex items-center justify-center"
+            >
+                Buka Kamera
+            </button>
+            
+            <button
+                onclick="capturePhoto()"
+                id="captureBtn"
+                class="flex-1 bg-purple-500 hover:bg-purple-600 text-white font-semibold py-3 rounded-lg transition-all duration-300 hidden flex items-center justify-center"
+            >
+                Ambil Foto
+            </button>
+            
+            <button
+                onclick="retakePhoto()"
+                id="retakeBtn"
+                class="flex-1 bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-3 rounded-lg transition-all duration-300 hidden flex items-center justify-center"
+            >
+                Foto Ulang
+            </button>
+
+            <button
+                onclick="switchCamera()"
+                id="switchCameraBtn"
+                class="flex-1 bg-gray-600 hover:bg-gray-700 text-white font-semibold py-3 rounded-lg transition-all duration-300 hidden flex items-center justify-center"
+            >
+                <svg
+                    class="w-5 h-5 mr-2"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                    />
+                </svg>
+                Ganti Kamera
+            </button>
+            
+        </div>
+    </div>
+</div>
           <button
             onclick="doAbsensi()"
             id="absenButton"
