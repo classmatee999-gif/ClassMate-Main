@@ -118,15 +118,6 @@ function loadAbsensiHistory() {
     });
 }
 
-// function switchCamera() {
-//     if (stream) {
-//         stream.getTracks().forEach(track => track.stop());
-//     }
-
-//     // 2. Ganti mode kamera
-//     currentFacingMode = (currentFacingMode === 'user') ? 'environment' : 'user';
-//     startCamera();
-// }
 
 async function startCamera() {
     try {
@@ -134,17 +125,18 @@ async function startCamera() {
         const startBtn = document.getElementById('startCameraBtn');
         const captureBtn = document.getElementById('captureBtn');
         
-        // Gunakan variabel global currentFacingMode
+        
         stream = await navigator.mediaDevices.getUserMedia({ 
             video: { 
                 width: { ideal: 1280 },
                 height: { ideal: 720 },
-                facingMode: 'user'; // <-- Menggunakan variabel
+                facingMode: 'user'
             } 
         });
         
         video.srcObject = stream;
         video.style.display = 'block';
+        
         
         startBtn.classList.add('hidden');
         captureBtn.classList.remove('hidden');
