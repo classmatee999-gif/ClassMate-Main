@@ -382,13 +382,13 @@ function doAbsensi() {
   } 
 
   
- if (hour >= 8) {
+ if (hour >= 23) {
      tandaiAlpa();
      return;
    }
 
   
-  if (hour >= 6 && hour < 8) {
+  if (hour >= 6 && hour < 23) {
     if (!navigator.geolocation) {
       alert('Perangkat Anda tidak mendukung GPS.');
       return;
