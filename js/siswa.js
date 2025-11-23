@@ -382,10 +382,10 @@ function doAbsensi() {
   } 
 
   
-  if (hour >= 8) {
-    tandaiAlpa();
-    return;
-  }
+ if (hour >= 8) {
+     tandaiAlpa();
+     return;
+   }
 
   
   if (hour >= 6 && hour < 8) {
