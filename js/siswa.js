@@ -2,6 +2,10 @@ checkAuth('siswa');
 
 console.log("siswa.js loaded!");
 
+let stream = null;
+let photoTaken = false;
+let currentFacingMode = 'user';
+
 document.addEventListener("DOMContentLoaded", () => {
     console.log("DOM loaded, menjalankan fungsi...");
     try {
@@ -120,22 +124,23 @@ async function startCamera() {
         const video = document.getElementById('video');
         const startBtn = document.getElementById('startCameraBtn');
         const captureBtn = document.getElementById('captureBtn');
+        const switchBtn = document.getElementById('switchCameraBtn');
         
         
         stream = await navigator.mediaDevices.getUserMedia({ 
             video: { 
                 width: { ideal: 1280 },
                 height: { ideal: 720 },
-                facingMode: 'user'
+                facingMode: currentFacingMode
             } 
         });
         
         video.srcObject = stream;
         video.style.display = 'block';
         
-        
         startBtn.classList.add('hidden');
         captureBtn.classList.remove('hidden');
+        switchBtn.classList.remove('hidden');
         
     } catch (error) {
         console.error('Error accessing camera:', error);
@@ -143,6 +148,14 @@ async function startCamera() {
     }
 }
 
+function switchCamera() {
+    if (stream) {
+        stream.getTracks().forEach(track => track.stop());
+        stream = null; 
+    }
+    currentFacingMode = (currentFacingMode === 'user') ? 'environment' : 'user';
+    startCamera();
+}
 
 function capturePhoto() {
     const video = document.getElementById('video');
@@ -151,7 +164,7 @@ function capturePhoto() {
     const captureBtn = document.getElementById('captureBtn');
     const retakeBtn = document.getElementById('retakeBtn');
     const absenButton = document.getElementById('absenButton');
-    
+    const switchBtn = document.getElementById('switchCameraBtn');
     
     canvas.width = video.videoWidth;
     canvas.height = video.videoHeight;
@@ -176,7 +189,7 @@ function capturePhoto() {
     
     captureBtn.classList.add('hidden');
     retakeBtn.classList.remove('hidden');
-    
+    switchBtn.classList.add('hidden');
     
     absenButton.disabled = false;
     absenButton.textContent = 'Absen Sekarang';
@@ -193,12 +206,12 @@ function retakePhoto() {
     const retakeBtn = document.getElementById('retakeBtn');
     const startBtn = document.getElementById('startCameraBtn');
     const absenButton = document.getElementById('absenButton');
-    
+    const switchBtn = document.getElementById('switchCameraBtn');
     
     capturedPhoto.style.display = 'none';
     retakeBtn.classList.add('hidden');
     startBtn.classList.remove('hidden');
-    
+    switchBtn.classList.add('hidden');
     
     absenButton.disabled = true;
     absenButton.textContent = 'Ambil Foto Dulu untuk Absen';
